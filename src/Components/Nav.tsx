@@ -4,7 +4,6 @@ import {
   Button,
   Flex,
   Avatar,
-  AvatarBadge,
   Image,
   useDisclosure,
   Tooltip,
@@ -13,6 +12,7 @@ import { SettingsIcon } from '@chakra-ui/icons';
 import SettingsModal from './SettingsModal';
 import configStore from '../stores/ConfigStore';
 import { Observer } from 'mobx-react';
+import SearchBar from './SearchBar';
 
 export default function Nav({ data }: { data: any }) {
   const {
@@ -68,16 +68,14 @@ export default function Nav({ data }: { data: any }) {
                 onClick={() => {
                   changeSelect('zilioner');
                 }}
-                style={
-                  data.selectedUser.indexOf('gamjagabee') !== -1
-                    ? {
-                        outline: '4px solid #6AB781',
-                        padding: '1px',
-                        background: 'white',
-                        cursor: 'pointer',
-                      }
-                    : { cursor: 'pointer', background: '#6AB781' }
-                }
+              ></Avatar>
+            </Tooltip>
+            <Tooltip label="배돈">
+              <Avatar
+                name="배돈"
+                onClick={() => {
+                  changeSelect('baedony');
+                }}
               ></Avatar>
             </Tooltip>
           </Flex>
@@ -95,6 +93,8 @@ export default function Nav({ data }: { data: any }) {
               />
             </Button>
           </Flex>
+
+          <SearchBar />
         </Box>
       )}
     </Observer>

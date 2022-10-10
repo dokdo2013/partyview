@@ -1,15 +1,15 @@
 import { makeAutoObservable } from 'mobx';
 export class ConfigStore {
-  public hideChat = false;
+  public displayChat = false;
   public displayEachChat = false;
   public darkModeEnabled = false;
 
   private loadLocalData() {
-    const localHideChat = localStorage.getItem('hideChat');
-    if (localHideChat === 'true') {
-      this.hideChat = true;
+    const displayChat = localStorage.getItem('displayChat');
+    if (displayChat === 'true') {
+      this.displayChat = true;
     } else {
-      this.hideChat = false;
+      this.displayChat = false;
     }
 
     const localVideoChatTogether = localStorage.getItem('displayEachChat');

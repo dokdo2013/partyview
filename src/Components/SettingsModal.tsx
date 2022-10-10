@@ -77,8 +77,8 @@ const SettingsModal = ({
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Text fontSize="md">채팅창 가리기</Text>
-                    {renderSwitch('hideChat')}
+                    <Text fontSize="md">통합 채팅창 보기</Text>
+                    {renderSwitch('displayChat')}
                   </Flex>
                 </Flex>
               </TabPanel>
@@ -98,7 +98,7 @@ const SettingsModal = ({
                     justifyContent="space-between"
                   >
                     <Text fontSize="md">
-                      방송과 채팅 함께 보기 (와이드 스크린 권장)
+                      방송별 채팅창 보기 (와이드 스크린 권장)
                     </Text>
                     {renderSwitch('displayEachChat')}
                   </Flex>
@@ -108,7 +108,7 @@ const SettingsModal = ({
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Text fontSize="md">다크모드</Text>
+                    <Text fontSize="md">어두운 테마 활성화</Text>
                     {renderSwitch('darkModeEnabled')}
                   </Flex>
                 </Text>
