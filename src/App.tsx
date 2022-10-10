@@ -7,8 +7,6 @@ import Content from './Components/Content';
 function App() {
   const [selectedUser, setSelectedUser] = useState([]);
 
-  // on Fail => Sentry.captureException(e);
-
   return (
     <ChakraProvider theme={theme}>
       <Nav
