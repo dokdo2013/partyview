@@ -9,7 +9,7 @@ import {
   useDisclosure,
   Tooltip,
 } from '@chakra-ui/react';
-import { SettingsIcon, LinkIcon } from '@chakra-ui/icons';
+import { SettingsIcon } from '@chakra-ui/icons';
 import SettingsModal from './SettingsModal';
 import configStore from '../stores/ConfigStore';
 import { Observer } from 'mobx-react';
@@ -49,11 +49,7 @@ export default function Nav({ data }: { data: any }) {
             alignItems: 'center',
           }}
         >
-          <SettingsModal
-            isOpen={settingsIsOpen}
-            onClose={settingsOnClose}
-            data={data}
-          />
+          <SettingsModal isOpen={settingsIsOpen} onClose={settingsOnClose} />
           <Flex alignItems="center">
             <Image src="../../leaven.png" h={12} />
             <Badge

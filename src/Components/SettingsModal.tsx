@@ -7,12 +7,10 @@ import {
   TabPanels,
   TabPanel,
   Button,
-  Badge,
   Divider,
   Modal,
   Flex,
   Switch,
-  Select,
   Link,
   Text,
   ModalOverlay,
@@ -28,25 +26,27 @@ import { Observer } from 'mobx-react';
 const SettingsModal = ({
   isOpen,
   onClose,
-  data,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  data: any;
 }) => {
-  const renderDisplayEachChat = () => (
-    <Switch
-      size="lg"
-      style={{ display: 'flex' }}
-      colorScheme="purple"
-      defaultValue={[]}
-      isChecked={configStore.displayEachChat}
-      onChange={() => {
-        const changeData = configStore.displayEachChat ? 'false' : 'true';
-        configStore.displayEachChat = !configStore.displayEachChat;
-        localStorage.setItem('setting-videoChatTogether', changeData);
-      }}
-    />
+  const renderSwitch = (property: keyof typeof configStore) => (
+    <Observer>
+      {() => (
+        <Switch
+          size="lg"
+          style={{ display: 'flex' }}
+          colorScheme="purple"
+          defaultValue={[]}
+          isChecked={configStore[property]}
+          onChange={() => {
+            const changeData = configStore[property] ? 'false' : 'true';
+            configStore[property] = !configStore[property];
+            localStorage.setItem(property, changeData);
+          }}
+        />
+      )}
+    </Observer>
   );
 
   return (
@@ -78,18 +78,7 @@ const SettingsModal = ({
                     justifyContent="space-between"
                   >
                     <Text fontSize="md">채팅창 가리기</Text>
-                    <Switch
-                      size="lg"
-                      style={{ display: 'flex' }}
-                      colorScheme="purple"
-                      defaultValue={[]}
-                      isChecked={data.hideChat}
-                      onChange={() => {
-                        const changeData = data.hideChat ? 'false' : 'true';
-                        data.setHideChat(!data.hideChat);
-                        localStorage.setItem('setting-hideChat', changeData);
-                      }}
-                    />
+                    {renderSwitch('hideChat')}
                   </Flex>
                 </Flex>
               </TabPanel>
@@ -111,7 +100,7 @@ const SettingsModal = ({
                     <Text fontSize="md">
                       방송과 채팅 함께 보기 (와이드 스크린 권장)
                     </Text>
-                    <Observer>{renderDisplayEachChat}</Observer>
+                    {renderSwitch('displayEachChat')}
                   </Flex>
                   <Flex
                     mb="4"
@@ -120,24 +109,7 @@ const SettingsModal = ({
                     justifyContent="space-between"
                   >
                     <Text fontSize="md">다크모드</Text>
-                    <Switch
-                      size="lg"
-                      style={{ display: 'flex' }}
-                      colorScheme="purple"
-                      defaultValue={[]}
-                      isChecked={configStore.darkModeEnabled}
-                      onChange={() => {
-                        const changeData = configStore.darkModeEnabled
-                          ? 'false'
-                          : 'true';
-                        configStore.darkModeEnabled =
-                          !configStore.darkModeEnabled;
-                        localStorage.setItem(
-                          'setting-chatDarkMode',
-                          changeData
-                        );
-                      }}
-                    />
+                    {renderSwitch('darkModeEnabled')}
                   </Flex>
                 </Text>
               </TabPanel>

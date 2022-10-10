@@ -5,23 +5,21 @@ export class ConfigStore {
   public darkModeEnabled = false;
 
   private loadLocalData() {
-    const localHideChat = localStorage.getItem('setting-hideChat');
+    const localHideChat = localStorage.getItem('hideChat');
     if (localHideChat === 'true') {
       this.hideChat = true;
     } else {
       this.hideChat = false;
     }
 
-    const localVideoChatTogether = localStorage.getItem(
-      'setting-videoChatTogether'
-    );
+    const localVideoChatTogether = localStorage.getItem('displayEachChat');
     if (localVideoChatTogether === 'true') {
       this.displayEachChat = true;
     } else {
       this.displayEachChat = false;
     }
 
-    const localChatDarkMode = localStorage.getItem('setting-chatDarkMode');
+    const localChatDarkMode = localStorage.getItem('darkModeEnabled');
     if (localChatDarkMode === 'true') {
       this.darkModeEnabled = true;
     } else {
