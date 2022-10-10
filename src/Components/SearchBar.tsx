@@ -1,5 +1,6 @@
 import { useSearchList } from '../hooks/useSearchList';
 import SearchInput from './SearchInput';
+import SearchList from './SearchList';
 
 export default function SearchBar() {
   const { data, mutate } = useSearchList('');
@@ -8,15 +9,7 @@ export default function SearchBar() {
 
   return (
     <div>
-      {data ? (
-        data?.map(user => (
-          <div style={{ color: 'red' }} key={user.id}>
-            {user.display_name}
-          </div>
-        ))
-      ) : (
-        <></>
-      )}
+      {data && <SearchList list={data} />}
       <SearchInput mutate={mutate} />
     </div>
   );
