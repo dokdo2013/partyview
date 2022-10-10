@@ -5,28 +5,30 @@ import { searchListFetcher } from '../hooks/useSearchList';
 
 export default function SearchInput({
   mutate,
+  searchKey,
+  setSearchKey,
 }: {
   mutate: KeyedMutator<StreamerSearchLiveDto[]>;
+  searchKey: string;
+  setSearchKey: (value: string) => void;
 }) {
-  const [searchKey, setSearchKey] = useState('');
-
+  const [dupKey, setDupKey] = useState(searchKey);
   useEffect(() => {
     const timeout = setTimeout(async () => {
-      const data = await searchListFetcher('/api/search', searchKey);
-      if (data) mutate(data);
+      setSearchKey(dupKey);
     }, 500);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [searchKey]);
+  }, [dupKey]);
 
   return (
     <div>
       <input
-        value={searchKey}
+        value={dupKey}
         onChange={e => {
-          setSearchKey(e.target.value);
+          setDupKey(e.target.value);
         }}
         type="text"
       />

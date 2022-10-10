@@ -149,7 +149,7 @@ export default function Content() {
 
         <Observer>
           {() =>
-            configStore.displayChat ? (
+            streamerListStore.list.length && configStore.displayChat ? (
               <Box>
                 {streamerListStore.list.length > 1 && (
                   <Box style={{ height: '30px' }}>
