@@ -1,4 +1,4 @@
-import useSWR, { KeyedMutator } from 'swr';
+import useSWR from 'swr';
 import API from '../api/axiosAPIClient';
 
 export const searchListFetcher = async (_: string, args: string) => {

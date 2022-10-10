@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { mutate, KeyedMutator } from 'swr';
+import { KeyedMutator } from 'swr';
 import { StreamerSearchLiveDto } from '../api';
-import { searchListFetcher } from '../hooks/useSearchList';
 
 export default function SearchInput({
-  mutate,
   searchKey,
   setSearchKey,
 }: {
@@ -14,7 +12,7 @@ export default function SearchInput({
 }) {
   const [dupKey, setDupKey] = useState(searchKey);
   useEffect(() => {
-    const timeout = setTimeout(async () => {
+    const timeout = setTimeout(() => {
       setSearchKey(dupKey);
     }, 500);
 

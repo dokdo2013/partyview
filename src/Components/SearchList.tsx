@@ -1,4 +1,3 @@
-import { List, ListItem, Select, Stack } from '@chakra-ui/react';
 import { StreamerSearchLiveDto } from '../api';
 import streamerListStore from '../stores/StreamerListStore';
 
@@ -9,7 +8,7 @@ export default function SearchList({
 }) {
   return (
     <div>
-      {list.map((item, index) => (
+      {list.map(item => (
         <option
           key={item.id}
           onClick={() => {

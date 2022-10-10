@@ -1,12 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-  Box,
-  Grid,
-  GridItem,
-  useColorModeValue,
-  Button,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, Grid, GridItem, Button, Flex } from '@chakra-ui/react';
 import './button-style.css';
 import configStore from '../stores/ConfigStore';
 import { Observer } from 'mobx-react';
