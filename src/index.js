@@ -11,7 +11,7 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 Sentry.init({
-  dsn: 'https://372ccba4b6d547a594fb44ba85ce13fa@o1217331.ingest.sentry.io/6359372',
+  dsn: 'https://6f8a71f8139c4607b8c57826de8e9de1@o1217331.ingest.sentry.io/4503958817800192',
   integrations: [new BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%
