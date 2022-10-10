@@ -99,6 +99,271 @@ export interface CommonExceptionTypeTypeMessage {
 /**
  * 
  * @export
+ * @interface CreateLinkDto
+ */
+export interface CreateLinkDto {
+    /**
+     * 링크 생성할 스트리머 아이디
+     * @type {Array<string>}
+     * @memberof CreateLinkDto
+     */
+    'items': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface LinkItemsResponseDto
+ */
+export interface LinkItemsResponseDto {
+    /**
+     * 링크 구성
+     * @type {Array<string>}
+     * @memberof LinkItemsResponseDto
+     */
+    'items': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface LinkItemsResponseDtoType
+ */
+export interface LinkItemsResponseDtoType {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkItemsResponseDtoType
+     */
+    'status': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkItemsResponseDtoType
+     */
+    'message': string;
+    /**
+     * 
+     * @type {LinkItemsResponseDtoTypeData}
+     * @memberof LinkItemsResponseDtoType
+     */
+    'data': LinkItemsResponseDtoTypeData;
+}
+/**
+ * 
+ * @export
+ * @interface LinkItemsResponseDtoTypeData
+ */
+export interface LinkItemsResponseDtoTypeData {
+    /**
+     * 링크 구성
+     * @type {Array<string>}
+     * @memberof LinkItemsResponseDtoTypeData
+     */
+    'items': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface LinkNotFoundExceptionType
+ */
+export interface LinkNotFoundExceptionType {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkNotFoundExceptionType
+     */
+    'statusCode': number;
+    /**
+     * 
+     * @type {object}
+     * @memberof LinkNotFoundExceptionType
+     */
+    'message': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkNotFoundExceptionType
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
+ * @interface LinkNotFoundExceptionTypeType
+ */
+export interface LinkNotFoundExceptionTypeType {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkNotFoundExceptionTypeType
+     */
+    'statusCode': number;
+    /**
+     * 
+     * @type {LinkNotFoundExceptionTypeTypeMessage}
+     * @memberof LinkNotFoundExceptionTypeType
+     */
+    'message': LinkNotFoundExceptionTypeTypeMessage;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkNotFoundExceptionTypeType
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
+ * @interface LinkNotFoundExceptionTypeTypeMessage
+ */
+export interface LinkNotFoundExceptionTypeTypeMessage {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkNotFoundExceptionTypeTypeMessage
+     */
+    'statusCode': number;
+    /**
+     * 
+     * @type {object}
+     * @memberof LinkNotFoundExceptionTypeTypeMessage
+     */
+    'message': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkNotFoundExceptionTypeTypeMessage
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
+ * @interface LinkResponseDto
+ */
+export interface LinkResponseDto {
+    /**
+     * 단축 링크
+     * @type {string}
+     * @memberof LinkResponseDto
+     */
+    'link': string;
+}
+/**
+ * 
+ * @export
+ * @interface LinkResponseDtoType
+ */
+export interface LinkResponseDtoType {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkResponseDtoType
+     */
+    'status': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkResponseDtoType
+     */
+    'message': string;
+    /**
+     * 
+     * @type {LinkResponseDtoTypeData}
+     * @memberof LinkResponseDtoType
+     */
+    'data': LinkResponseDtoTypeData;
+}
+/**
+ * 
+ * @export
+ * @interface LinkResponseDtoTypeData
+ */
+export interface LinkResponseDtoTypeData {
+    /**
+     * 단축 링크
+     * @type {string}
+     * @memberof LinkResponseDtoTypeData
+     */
+    'link': string;
+}
+/**
+ * 
+ * @export
+ * @interface LinkUnprocessableEntityExceptionType
+ */
+export interface LinkUnprocessableEntityExceptionType {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkUnprocessableEntityExceptionType
+     */
+    'statusCode': number;
+    /**
+     * 
+     * @type {object}
+     * @memberof LinkUnprocessableEntityExceptionType
+     */
+    'message': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkUnprocessableEntityExceptionType
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
+ * @interface LinkUnprocessableEntityExceptionTypeType
+ */
+export interface LinkUnprocessableEntityExceptionTypeType {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkUnprocessableEntityExceptionTypeType
+     */
+    'statusCode': number;
+    /**
+     * 
+     * @type {LinkUnprocessableEntityExceptionTypeTypeMessage}
+     * @memberof LinkUnprocessableEntityExceptionTypeType
+     */
+    'message': LinkUnprocessableEntityExceptionTypeTypeMessage;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkUnprocessableEntityExceptionTypeType
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
+ * @interface LinkUnprocessableEntityExceptionTypeTypeMessage
+ */
+export interface LinkUnprocessableEntityExceptionTypeTypeMessage {
+    /**
+     * 
+     * @type {number}
+     * @memberof LinkUnprocessableEntityExceptionTypeTypeMessage
+     */
+    'statusCode': number;
+    /**
+     * 
+     * @type {object}
+     * @memberof LinkUnprocessableEntityExceptionTypeTypeMessage
+     */
+    'message': object;
+    /**
+     * 
+     * @type {string}
+     * @memberof LinkUnprocessableEntityExceptionTypeTypeMessage
+     */
+    'error': string;
+}
+/**
+ * 
+ * @export
  * @interface NotBroadcastingException
  */
 export interface NotBroadcastingException {
@@ -1568,10 +1833,14 @@ export const LinkApiAxiosParamCreator = function (configuration?: Configuration)
     return {
         /**
          * 
+         * @summary 링크 구성 생성
+         * @param {CreateLinkDto} createLinkDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkControllerCreateLink: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        linkControllerCreateLink: async (createLinkDto: CreateLinkDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createLinkDto' is not null or undefined
+            assertParamExists('linkControllerCreateLink', 'createLinkDto', createLinkDto)
             const localVarPath = `/link`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1586,9 +1855,12 @@ export const LinkApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createLinkDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1597,11 +1869,17 @@ export const LinkApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @summary 링크 구성 조회
+         * @param {string} key 링크 key
+         * @param {'true' | 'false'} [getInfo] 유저 정보 함께 조회 여부
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkControllerDeleteLink: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/link`;
+        linkControllerGetLink: async (key: string, getInfo?: 'true' | 'false', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'key' is not null or undefined
+            assertParamExists('linkControllerGetLink', 'key', key)
+            const localVarPath = `/link/{key}`
+                .replace(`{${"key"}}`, encodeURIComponent(String(key)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1609,9 +1887,13 @@ export const LinkApiAxiosParamCreator = function (configuration?: Configuration)
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (getInfo !== undefined) {
+                localVarQueryParameter['get_info'] = getInfo;
+            }
 
 
     
@@ -1636,20 +1918,25 @@ export const LinkApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @summary 링크 구성 생성
+         * @param {CreateLinkDto} createLinkDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async linkControllerCreateLink(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.linkControllerCreateLink(options);
+        async linkControllerCreateLink(createLinkDto: CreateLinkDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LinkResponseDtoType>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.linkControllerCreateLink(createLinkDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
+         * @summary 링크 구성 조회
+         * @param {string} key 링크 key
+         * @param {'true' | 'false'} [getInfo] 유저 정보 함께 조회 여부
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async linkControllerDeleteLink(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.linkControllerDeleteLink(options);
+        async linkControllerGetLink(key: string, getInfo?: 'true' | 'false', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LinkItemsResponseDtoType>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.linkControllerGetLink(key, getInfo, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -1664,19 +1951,24 @@ export const LinkApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
+         * @summary 링크 구성 생성
+         * @param {CreateLinkDto} createLinkDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkControllerCreateLink(options?: any): AxiosPromise<void> {
-            return localVarFp.linkControllerCreateLink(options).then((request) => request(axios, basePath));
+        linkControllerCreateLink(createLinkDto: CreateLinkDto, options?: any): AxiosPromise<LinkResponseDtoType> {
+            return localVarFp.linkControllerCreateLink(createLinkDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
+         * @summary 링크 구성 조회
+         * @param {string} key 링크 key
+         * @param {'true' | 'false'} [getInfo] 유저 정보 함께 조회 여부
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        linkControllerDeleteLink(options?: any): AxiosPromise<void> {
-            return localVarFp.linkControllerDeleteLink(options).then((request) => request(axios, basePath));
+        linkControllerGetLink(key: string, getInfo?: 'true' | 'false', options?: any): AxiosPromise<LinkItemsResponseDtoType> {
+            return localVarFp.linkControllerGetLink(key, getInfo, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1690,22 +1982,27 @@ export const LinkApiFactory = function (configuration?: Configuration, basePath?
 export class LinkApi extends BaseAPI {
     /**
      * 
+     * @summary 링크 구성 생성
+     * @param {CreateLinkDto} createLinkDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LinkApi
      */
-    public linkControllerCreateLink(options?: AxiosRequestConfig) {
-        return LinkApiFp(this.configuration).linkControllerCreateLink(options).then((request) => request(this.axios, this.basePath));
+    public linkControllerCreateLink(createLinkDto: CreateLinkDto, options?: AxiosRequestConfig) {
+        return LinkApiFp(this.configuration).linkControllerCreateLink(createLinkDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
+     * @summary 링크 구성 조회
+     * @param {string} key 링크 key
+     * @param {'true' | 'false'} [getInfo] 유저 정보 함께 조회 여부
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof LinkApi
      */
-    public linkControllerDeleteLink(options?: AxiosRequestConfig) {
-        return LinkApiFp(this.configuration).linkControllerDeleteLink(options).then((request) => request(this.axios, this.basePath));
+    public linkControllerGetLink(key: string, getInfo?: 'true' | 'false', options?: AxiosRequestConfig) {
+        return LinkApiFp(this.configuration).linkControllerGetLink(key, getInfo, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
