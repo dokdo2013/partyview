@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Grid, GridItem, useColorModeValue, Flex } from '@chakra-ui/react';
 import './button-style.css';
 

@@ -22,6 +22,8 @@ import {
   ModalBody,
   ModalFooter,
 } from '@chakra-ui/react';
+import configStore from '../stores/ConfigStore';
+import { Observer } from 'mobx-react';
 
 const SettingsModal = ({
   isOpen,
@@ -32,6 +34,21 @@ const SettingsModal = ({
   onClose: () => void;
   data: any;
 }) => {
+  const renderDisplayEachChat = () => (
+    <Switch
+      size="lg"
+      style={{ display: 'flex' }}
+      colorScheme="purple"
+      defaultValue={[]}
+      isChecked={configStore.displayEachChat}
+      onChange={() => {
+        const changeData = configStore.displayEachChat ? 'false' : 'true';
+        configStore.displayEachChat = !configStore.displayEachChat;
+        localStorage.setItem('setting-videoChatTogether', changeData);
+      }}
+    />
+  );
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
@@ -41,86 +58,18 @@ const SettingsModal = ({
         <ModalBody>
           <Tabs variant="soft-rounded" size="sm" colorScheme="purple">
             <TabList flexWrap="wrap">
-              <Tab>Grid 설정</Tab>
               <Tab>설정</Tab>
               <Tab>실험실 (Beta)</Tab>
-              <Tab>업데이트 기록</Tab>
               <Tab>쿠키 정책</Tab>
               <Tab>정보</Tab>
             </TabList>
             <Divider mt={2}></Divider>
             <TabPanels>
               <TabPanel>
-                <Text mt="6" align="center">
-                  Grid 기능 제공 준비 중입니다.
-                </Text>
-
-                {/* <Flex
-                  style={{
-                    backgroundColor: '',
-                    width: '100px',
-                    height: '100px',
-                  }}
-                >
-                  <Flex
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      margin: '10%',
-                      backgroundColor: 'lightgrey',
-                    }}
-                  ></Flex>
-
-                  <Flex
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      margin: '10%',
-                      backgroundColor: 'lightgrey',
-                    }}
-                  ></Flex>
-
-                  <Flex
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      margin: '10%',
-                      backgroundColor: 'lightgrey',
-                    }}
-                  ></Flex>
-                </Flex> */}
-              </TabPanel>
-              <TabPanel>
                 <Text fontSize="lg" fontWeight="bold" mb="4">
                   기본 기능
                 </Text>
                 <Flex flexWrap="wrap">
-                  <Flex
-                    ml="6"
-                    mb="4"
-                    style={{ width: '100%' }}
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Text fontSize="md">부캐 보이기 (키위골드, 권냥냥)</Text>
-                    <Switch
-                      size="lg"
-                      style={{ display: 'flex' }}
-                      colorScheme="purple"
-                      defaultValue={[]}
-                      isChecked={data.useSubCharacter}
-                      onChange={() => {
-                        const changeData = data.useSubCharacter
-                          ? 'false'
-                          : 'true';
-                        data.setUseSubCharacter(!data.useSubCharacter);
-                        localStorage.setItem(
-                          'setting-useSubCharacter',
-                          changeData
-                        );
-                      }}
-                    />
-                  </Flex>
                   <Flex
                     ml="6"
                     mb="4"
@@ -142,49 +91,7 @@ const SettingsModal = ({
                       }}
                     />
                   </Flex>
-                  {/* <Flex
-                    ml="6"
-                    mb="4"
-                    style={{ width: '100%' }}
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Text fontSize="md">
-                      멤버별 선택시 테두리 테마색상으로 설정
-                    </Text>
-                    <Switch
-                      size="lg"
-                      style={{ display: 'flex' }}
-                      colorScheme="purple"
-                      defaultValue={true}
-                      // isChecked={parseInt(data.useCopy) === 1}
-                      onChange={() => {
-                        // const changeData = data.useCopy === 1 ? 0 : 1;
-                        // data.setUseCopy(changeData);
-                        // localStorage.setItem('setting_use_copy', changeData);
-                        // changeSuccess();
-                      }}
-                    />
-                  </Flex> */}
                 </Flex>
-                {/* <Text fontSize="lg" fontWeight="bold" mb="4" mt="4">
-                  테마 색상 설정
-                </Text>
-                <Flex flexWrap="wrap" ml="6">
-                  <Button
-                    mr={3}
-                    className="color-selected"
-                    colorScheme="blue"
-                  ></Button>
-                  <Button mr={3} colorScheme="gray"></Button>
-                  <Button mr={3} colorScheme="green"></Button>
-                  <Button mr={3} colorScheme="yellow"></Button>
-                  <Button mr={3} colorScheme="orange"></Button>
-                  <Button mr={3} colorScheme="red"></Button>
-                  <Button mr={3} colorScheme="cyan"></Button>
-                  <Button mr={3} colorScheme="purple"></Button>
-                  <Button mr={3} colorScheme="pink"></Button>
-                </Flex> */}
               </TabPanel>
               <TabPanel>
                 <Alert status="warning" fontSize="sm">
@@ -204,23 +111,7 @@ const SettingsModal = ({
                     <Text fontSize="md">
                       방송과 채팅 함께 보기 (와이드 스크린 권장)
                     </Text>
-                    <Switch
-                      size="lg"
-                      style={{ display: 'flex' }}
-                      colorScheme="purple"
-                      defaultValue={[]}
-                      isChecked={data.videoChatTogether}
-                      onChange={() => {
-                        const changeData = data.videoChatTogether
-                          ? 'false'
-                          : 'true';
-                        data.setVideoChatTogether(!data.videoChatTogether);
-                        localStorage.setItem(
-                          'setting-videoChatTogether',
-                          changeData
-                        );
-                      }}
-                    />
+                    <Observer>{renderDisplayEachChat}</Observer>
                   </Flex>
                   <Flex
                     mb="4"
@@ -234,10 +125,13 @@ const SettingsModal = ({
                       style={{ display: 'flex' }}
                       colorScheme="purple"
                       defaultValue={[]}
-                      isChecked={data.chatDarkMode}
+                      isChecked={configStore.darkModeEnabled}
                       onChange={() => {
-                        const changeData = data.chatDarkMode ? 'false' : 'true';
-                        data.setChatDarkMode(!data.chatDarkMode);
+                        const changeData = configStore.darkModeEnabled
+                          ? 'false'
+                          : 'true';
+                        configStore.darkModeEnabled =
+                          !configStore.darkModeEnabled;
                         localStorage.setItem(
                           'setting-chatDarkMode',
                           changeData
@@ -246,43 +140,6 @@ const SettingsModal = ({
                     />
                   </Flex>
                 </Text>
-              </TabPanel>
-              <TabPanel>
-                <Text>
-                  현재 버전 :{' '}
-                  <Badge size="xl" colorScheme="gray">
-                    0.1.6
-                  </Badge>
-                </Text>
-                <br />
-                <Text>
-                  <Badge>0.1.6</Badge> 상단 Navigation Bar 프로필 이미지를
-                  대모님 이미지로 변경, 이미지 CDN 교체 (2022.05.03)
-                </Text>
-                <Text>
-                  <Badge>0.1.5</Badge> 멤버 아이콘에 툴팁 추가, 구나구나
-                  아이콘에 마우스 올려도 마우스 모양 바뀌지 않던 오류 수정, 링크
-                  모달에 키위골드와 권냥냥 추가 (2022.04.29)
-                </Text>
-                <Text>
-                  <Badge>0.1.4</Badge> 구슬요 프로필 이미지 변경 (2022.04.27)
-                </Text>
-                <Text>
-                  <Badge>0.1.3</Badge> 멤버별 테마색상 테두리 적용, 채팅창
-                  가리기 기능 추가 (2022.04.26)
-                </Text>
-                <Text>
-                  <Badge>0.1.2</Badge> 생방송 API 호출 속도 개선, 부캐 보이기
-                  기능 추가 (2022.04.26)
-                </Text>
-                <Text>
-                  <Badge>0.1.1</Badge> 상단 Navigation Bar 기능 추가
-                  (2022.04.23)
-                </Text>
-                <Text>
-                  <Badge>0.1.0</Badge> 최초 공개 (2022.04.21)
-                </Text>
-                <br />
               </TabPanel>
               <TabPanel>
                 <Text fontSize="xl" fontWeight="bold">
@@ -294,23 +151,22 @@ const SettingsModal = ({
                 </Text>
                 <br />
                 <Text fontSize="sm">
-                  {`
                   본 웹사이트는 이용자에 대한 정보를 저장하고 수시로 찾아내는
-                  '쿠키(cookie)'를 사용합니다. 쿠키는 웹사이트가 이용자의 컴퓨터
-                  브라우저(넷스케이프, 인터넷 익스플로러 등)로 전송하는 소량의
-                  정보입니다. 이용자가 웹사이트에 접속을 하면 본 웹사이트는
-                  이용자의 브라우저에 있는 쿠키의 내용을 읽고, 이용자의
-                  추가정보를 이용자의 컴퓨터에서 찾아 접속에 따른 성명 등의 추가
-                  입력 없이 서비스를 제공할 수 있습니다. 쿠키는 이용자의
-                  컴퓨터는 식별하지만 이용자를 개인적으로 식별하지는 않습니다.
+                  {'쿠키(cookie)'}를 사용합니다. 쿠키는 웹사이트가 이용자의
+                  컴퓨터 브라우저(넷스케이프, 인터넷 익스플로러 등)로 전송하는
+                  소량의 정보입니다. 이용자가 웹사이트에 접속을 하면 본
+                  웹사이트는 이용자의 브라우저에 있는 쿠키의 내용을 읽고,
+                  이용자의 추가정보를 이용자의 컴퓨터에서 찾아 접속에 따른 성명
+                  등의 추가 입력 없이 서비스를 제공할 수 있습니다. 쿠키는
+                  이용자의 컴퓨터는 식별하지만 이용자를 개인적으로 식별하지는
+                  않습니다.
                   <br />
-                  <br />
-                  또한 이용자는 쿠키에 대한 선택권이 있습니다. 웹브라우저 상단의
-                  도구 - 인터넷옵션 탭(option tab)에서 모든 쿠키를 다
+                  <br /> 또한 이용자는 쿠키에 대한 선택권이 있습니다. 웹브라우저
+                  상단의 도구 - 인터넷옵션 탭(option tab)에서 모든 쿠키를 다
                   받아들이거나, 쿠키가 설치될 때 통지를 보내도록 하거나, 아니면
                   모든 쿠키를 거부할 수 있는 선택권을 가질 수 있습니다. 단,
                   쿠키의 저장을 거부하실 경우 본 웹사이트에서 제공하는 일부
-                  서비스는 이용하실 수 없게 됩니다.`}
+                  서비스는 이용하실 수 없게 됩니다.
                 </Text>
                 <br />
                 <Text fontSize="lg" fontWeight="semibold">

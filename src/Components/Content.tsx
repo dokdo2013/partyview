@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Grid,
@@ -7,6 +7,8 @@ import {
   Button,
 } from '@chakra-ui/react';
 import './button-style.css';
+import configStore from '../stores/ConfigStore';
+import { Observer } from 'mobx-react';
 
 export default function Content({ data }: { data: any }) {
   const [chatUser, setChatUser] = useState('');
@@ -96,124 +98,128 @@ export default function Content({ data }: { data: any }) {
   let currCnt = 0;
 
   return (
-    <Box
-      minH="calc(100vh - 64px)"
-      bg={data.chatDarkMode ? 'gray.800' : 'gray.100'}
-      style={{ display: 'flex', justifyContent: 'space-between' }}
-    >
-      {data.selectedUser.length ? (
-        <>
-          <Box
-            style={
-              data.hideChat
-                ? {
-                    width: '100vw',
-                    height: 'calc(100vh - 64px)',
-                  }
-                : {
-                    width: 'calc(100vw - 310px)',
-                    height: 'calc(100vh - 64px)',
-                  }
-            }
-          >
-            <Grid
-              templateRows={templateRows}
-              templateColumns={templateColumns}
-              style={{ height: '100%' }}
-            >
-              {data.selectedUser.map((user: string) => {
-                return (
-                  <GridItem
-                    key={user}
-                    w="100%"
-                    h="100%"
-                    colSpan={
-                      data.selectedUser.length === ++currCnt ||
-                      (data.selectedUser.length === 10 && currCnt >= 9)
-                        ? lastOne
-                        : 1
-                    }
-                  >
-                    <iframe
-                      title="embed"
-                      id={'embed_' + user}
-                      src={
-                        'https://player.twitch.tv/?muted=true&channel=' +
-                        user +
-                        '&parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team'
+    <Observer>
+      {() => (
+        <Box
+          minH="calc(100vh - 64px)"
+          bg={configStore.darkModeEnabled ? 'gray.800' : 'gray.100'}
+          style={{ display: 'flex', justifyContent: 'space-between' }}
+        >
+          {data.selectedUser.length ? (
+            <>
+              <Box
+                style={
+                  data.hideChat
+                    ? {
+                        width: '100vw',
+                        height: 'calc(100vh - 64px)',
                       }
-                      className="stream"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                      }}
-                    ></iframe>
-                  </GridItem>
-                );
-              })}
-            </Grid>
-          </Box>
-          {data.selectedUser.length !== 0 && !data.hideChat && (
-            <Box
-              style={{
-                height:
-                  'calc(100vh - ' +
-                  (data.selectedUser.length > 1 ? 94 : 64) +
-                  'px)',
-                width: '340px',
-              }}
-            >
-              {data.selectedUser.length > 1 && (
-                <Box style={{ height: '30px' }}>
+                    : {
+                        width: 'calc(100vw - 310px)',
+                        height: 'calc(100vh - 64px)',
+                      }
+                }
+              >
+                <Grid
+                  templateRows={templateRows}
+                  templateColumns={templateColumns}
+                  style={{ height: '100%' }}
+                >
                   {data.selectedUser.map((user: string) => {
                     return (
-                      <Button
+                      <GridItem
                         key={user}
-                        h={30}
-                        size="xs"
-                        style={{ padding: '5px' }}
-                        colorScheme={
-                          chatUser === user
-                            ? 'teal'
-                            : data.chatDarkMode
-                            ? 'blackAlpha'
-                            : 'gray'
+                        w="100%"
+                        h="100%"
+                        colSpan={
+                          data.selectedUser.length === ++currCnt ||
+                          (data.selectedUser.length === 10 && currCnt >= 9)
+                            ? lastOne
+                            : 1
                         }
-                        onClick={() => {
-                          setChatUser(user);
-                        }}
                       >
-                        {changeNameToKor(user)}
-                      </Button>
+                        <iframe
+                          title="embed"
+                          id={'embed_' + user}
+                          src={
+                            'https://player.twitch.tv/?muted=true&channel=' +
+                            user +
+                            '&parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team'
+                          }
+                          className="stream"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                          }}
+                        ></iframe>
+                      </GridItem>
                     );
                   })}
+                </Grid>
+              </Box>
+              {data.selectedUser.length !== 0 && !data.hideChat && (
+                <Box
+                  style={{
+                    height:
+                      'calc(100vh - ' +
+                      (data.selectedUser.length > 1 ? 94 : 64) +
+                      'px)',
+                    width: '340px',
+                  }}
+                >
+                  {data.selectedUser.length > 1 && (
+                    <Box style={{ height: '30px' }}>
+                      {data.selectedUser.map((user: string) => {
+                        return (
+                          <Button
+                            key={user}
+                            h={30}
+                            size="xs"
+                            style={{ padding: '5px' }}
+                            colorScheme={
+                              chatUser === user
+                                ? 'teal'
+                                : configStore.darkModeEnabled
+                                ? 'blackAlpha'
+                                : 'gray'
+                            }
+                            onClick={() => {
+                              setChatUser(user);
+                            }}
+                          >
+                            {changeNameToKor(user)}
+                          </Button>
+                        );
+                      })}
+                    </Box>
+                  )}
+                  <iframe
+                    title="chat"
+                    scrolling="no"
+                    id={'chat-' + chatUser + '-embed'}
+                    src={
+                      'https://twitch.tv/embed/' +
+                      chatUser +
+                      (configStore.darkModeEnabled
+                        ? '/chat?darkpopout&parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team'
+                        : '/chat?parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team')
+                    }
+                    height="100%"
+                    width="100%"
+                  ></iframe>
                 </Box>
               )}
-              <iframe
-                title="chat"
-                scrolling="no"
-                id={'chat-' + chatUser + '-embed'}
-                src={
-                  'https://twitch.tv/embed/' +
-                  chatUser +
-                  (data.chatDarkMode
-                    ? '/chat?darkpopout&parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team'
-                    : '/chat?parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team')
-                }
-                height="100%"
-                width="100%"
-              ></iframe>
-            </Box>
+            </>
+          ) : (
+            <Box
+              style={{
+                width: 'calc(100vw - 310px)',
+                height: 'calc(100vh - 64px)',
+              }}
+            ></Box>
           )}
-        </>
-      ) : (
-        <Box
-          style={{
-            width: 'calc(100vw - 310px)',
-            height: 'calc(100vh - 64px)',
-          }}
-        ></Box>
+        </Box>
       )}
-    </Box>
+    </Observer>
   );
 }
