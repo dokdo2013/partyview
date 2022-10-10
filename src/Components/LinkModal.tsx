@@ -10,7 +10,13 @@ import {
 } from '@chakra-ui/react';
 import LinkTabs from './LinkTabs';
 
-const LinkModal = ({ isOpen, onClose }) => {
+const LinkModal = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />

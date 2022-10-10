@@ -19,7 +19,15 @@ import {
   FaMusic,
 } from 'react-icons/fa';
 
-const Panel = ({ link, icon, linkName }) => {
+const Panel = ({
+  link,
+  icon,
+  linkName,
+}: {
+  link: string;
+  icon: any;
+  linkName: string;
+}) => {
   let target;
   switch (icon) {
     case 'youtube':
@@ -123,10 +131,6 @@ const LinkTabs = () => {
             icon="tiktok"
             link="https://www.tiktok.com/@official_leaven"
             linkName="Tiktok (틱톡)"
-          />
-          <Panel
-            link="https://cafe.naver.com/leaven0402"
-            linkName="Fan Cafe (팬카페)"
           />
         </TabPanel>
         {/* 감자가비 */}
@@ -319,10 +323,6 @@ const LinkTabs = () => {
             link="https://www.streamersonglist.com/t/yudarlinn/songs"
             linkName="노래책"
           />
-          <Panel
-            link="https://cafe.naver.com/yudarlinn"
-            linkName="Fan Cafe (팬카페)"
-          />
         </TabPanel>
         {/* 전해리 */}
         <TabPanel>
@@ -350,10 +350,6 @@ const LinkTabs = () => {
             icon="instagram"
             link="https://www.instagram.com/junharry_/"
             linkName="Instagram (인스타그램)"
-          />
-          <Panel
-            link="https://cafe.naver.com/forharryfan"
-            linkName="Fan Cafe (팬카페)"
           />
         </TabPanel>
         {/* 지야 */}

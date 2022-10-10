@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Box, Grid, GridItem, useColorModeValue, Flex } from '@chakra-ui/react';
 import './button-style.css';
 
-export default function ContentFull({ data }) {
+export default function ContentFull({ data }: { data: any }) {
   const [chatUser, setChatUser] = useState('');
 
-  const changeNameToKor = name => {
+  const changeNameToKor = (name: string) => {
     switch (name) {
       case 'gamjagabee':
         return '가비';
@@ -108,9 +108,10 @@ export default function ContentFull({ data }) {
               templateColumns={templateColumns}
               style={{ height: '100%' }}
             >
-              {data.selectedUser.map(user => {
+              {data.selectedUser.map((user: string) => {
                 return (
                   <GridItem
+                    key={user}
                     w="100%"
                     h="100%"
                     colSpan={
@@ -129,12 +130,12 @@ export default function ContentFull({ data }) {
                           user +
                           '&parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team'
                         }
-                        class="stream"
-                        allowFullScreen="true"
+                        className="stream"
                         style={{
                           width: '100%',
                           height: '100%',
                         }}
+                        allowFullScreen={true}
                       ></iframe>
                       <iframe
                         title="chat"
@@ -147,6 +148,7 @@ export default function ContentFull({ data }) {
                         }
                         width="340px"
                         height="100%"
+                        allowFullScreen={true}
                       ></iframe>
                     </Flex>
                   </GridItem>

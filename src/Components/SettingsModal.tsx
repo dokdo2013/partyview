@@ -23,7 +23,15 @@ import {
   ModalFooter,
 } from '@chakra-ui/react';
 
-const SettingsModal = ({ isOpen, onClose, data }) => {
+const SettingsModal = ({
+  isOpen,
+  onClose,
+  data,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  data: any;
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
@@ -99,7 +107,7 @@ const SettingsModal = ({ isOpen, onClose, data }) => {
                       size="lg"
                       style={{ display: 'flex' }}
                       colorScheme="purple"
-                      defaultValue={false}
+                      defaultValue={[]}
                       isChecked={data.useSubCharacter}
                       onChange={() => {
                         const changeData = data.useSubCharacter
@@ -125,7 +133,7 @@ const SettingsModal = ({ isOpen, onClose, data }) => {
                       size="lg"
                       style={{ display: 'flex' }}
                       colorScheme="purple"
-                      defaultValue={false}
+                      defaultValue={[]}
                       isChecked={data.hideChat}
                       onChange={() => {
                         const changeData = data.hideChat ? 'false' : 'true';
@@ -200,7 +208,7 @@ const SettingsModal = ({ isOpen, onClose, data }) => {
                       size="lg"
                       style={{ display: 'flex' }}
                       colorScheme="purple"
-                      defaultValue={false}
+                      defaultValue={[]}
                       isChecked={data.videoChatTogether}
                       onChange={() => {
                         const changeData = data.videoChatTogether
@@ -225,7 +233,7 @@ const SettingsModal = ({ isOpen, onClose, data }) => {
                       size="lg"
                       style={{ display: 'flex' }}
                       colorScheme="purple"
-                      defaultValue={false}
+                      defaultValue={[]}
                       isChecked={data.chatDarkMode}
                       onChange={() => {
                         const changeData = data.chatDarkMode ? 'false' : 'true';
@@ -286,6 +294,7 @@ const SettingsModal = ({ isOpen, onClose, data }) => {
                 </Text>
                 <br />
                 <Text fontSize="sm">
+                  {`
                   본 웹사이트는 이용자에 대한 정보를 저장하고 수시로 찾아내는
                   '쿠키(cookie)'를 사용합니다. 쿠키는 웹사이트가 이용자의 컴퓨터
                   브라우저(넷스케이프, 인터넷 익스플로러 등)로 전송하는 소량의
@@ -301,7 +310,7 @@ const SettingsModal = ({ isOpen, onClose, data }) => {
                   받아들이거나, 쿠키가 설치될 때 통지를 보내도록 하거나, 아니면
                   모든 쿠키를 거부할 수 있는 선택권을 가질 수 있습니다. 단,
                   쿠키의 저장을 거부하실 경우 본 웹사이트에서 제공하는 일부
-                  서비스는 이용하실 수 없게 됩니다.
+                  서비스는 이용하실 수 없게 됩니다.`}
                 </Text>
                 <br />
                 <Text fontSize="lg" fontWeight="semibold">

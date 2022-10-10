@@ -13,7 +13,7 @@ import { SettingsIcon, LinkIcon } from '@chakra-ui/icons';
 import SettingsModal from './SettingsModal';
 import LinkModal from './LinkModal';
 
-export default function Nav({ data }) {
+export default function Nav({ data }: { data: any }) {
   // Modal Disclosure
   const {
     isOpen: linkIsOpen,
@@ -26,7 +26,7 @@ export default function Nav({ data }) {
     onClose: settingsOnClose,
   } = useDisclosure();
 
-  const changeSelect = member => {
+  const changeSelect = (member: string) => {
     if (data.selectedUser.indexOf(member) === -1) {
       // 선택 안 되어있으면 선택 상태로 변경
       data.setSelectedUser([...data.selectedUser, member]);

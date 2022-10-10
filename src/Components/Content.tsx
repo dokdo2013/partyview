@@ -8,10 +8,10 @@ import {
 } from '@chakra-ui/react';
 import './button-style.css';
 
-export default function Content({ data }) {
+export default function Content({ data }: { data: any }) {
   const [chatUser, setChatUser] = useState('');
 
-  const changeNameToKor = name => {
+  const changeNameToKor = (name: string) => {
     switch (name) {
       case 'gamjagabee':
         return '가비';
@@ -121,9 +121,10 @@ export default function Content({ data }) {
               templateColumns={templateColumns}
               style={{ height: '100%' }}
             >
-              {data.selectedUser.map(user => {
+              {data.selectedUser.map((user: string) => {
                 return (
                   <GridItem
+                    key={user}
                     w="100%"
                     h="100%"
                     colSpan={
@@ -141,8 +142,7 @@ export default function Content({ data }) {
                         user +
                         '&parent=localhost&parent=multi.leaven.team&parent=dev-multi.leaven.team'
                       }
-                      class="stream"
-                      allowFullScreen="true"
+                      className="stream"
                       style={{
                         width: '100%',
                         height: '100%',
@@ -165,9 +165,10 @@ export default function Content({ data }) {
             >
               {data.selectedUser.length > 1 && (
                 <Box style={{ height: '30px' }}>
-                  {data.selectedUser.map(user => {
+                  {data.selectedUser.map((user: string) => {
                     return (
                       <Button
+                        key={user}
                         h={30}
                         size="xs"
                         style={{ padding: '5px' }}
