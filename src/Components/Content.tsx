@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import './button-style.css';
 import configStore from '../stores/ConfigStore';
 import { Observer } from 'mobx-react';
 import streamerListStore from '../stores/StreamerListStore';
