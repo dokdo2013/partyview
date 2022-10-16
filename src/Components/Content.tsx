@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Box, GridItem, Button, Flex } from '@chakra-ui/react';
 import './button-style.css';
 import configStore from '../stores/ConfigStore';
 import { Observer } from 'mobx-react';
 import streamerListStore from '../stores/StreamerListStore';
 import { getTwitchPlayerUrl, getTwitchChatUrl } from '../utils/getTwitchUrls';
 import { reaction } from 'mobx';
+import classNames from 'classnames';
 
 export default function Content() {
   const [chatUser, setChatUser] = useState('');
@@ -22,23 +22,25 @@ export default function Content() {
   }, []);
 
   const renderPlayers = () => (
-    <>
+    <ul
+      className={classNames(
+        'flex flex-wrap overflow-hidden',
+        configStore.displayChat ? 'flex-[0.8]' : 'flex-1'
+      )}
+    >
       {streamerListStore.list.map(streamer => {
         return (
-          <GridItem key={streamer.id} w="100%" h="100%">
-            <Flex style={{ height: '100%' }}>
-              <iframe
-                title="embed"
-                id={'embed_' + streamer.id}
-                src={getTwitchPlayerUrl(streamer.broadcaster_login, host)}
-                className="stream"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
-              />
+          <li className="flex w-[50%] h-[40vh]" key={streamer.id}>
+            <iframe
+              title="embed"
+              id={'embed_' + streamer.id}
+              src={getTwitchPlayerUrl(streamer.broadcaster_login, host)}
+              className="w-[80%] h-full"
+            />
+            {configStore.displayEachChat && (
               <iframe
                 title="chat"
+                className="w-[20%] h-full"
                 scrolling="no"
                 id={'chat-' + streamer.id + '-embed'}
                 src={getTwitchChatUrl(
@@ -46,45 +48,41 @@ export default function Content() {
                   configStore.darkModeEnabled,
                   host
                 )}
-                width="340px"
-                height="100%"
                 allowFullScreen={true}
               />
-            </Flex>
-          </GridItem>
+            )}
+          </li>
         );
       })}
-    </>
+    </ul>
   );
 
   const renderintegratedChatSection = () =>
     streamerListStore.list.length && configStore.displayChat && chatUser ? (
-      <Box>
+      <div className="flex flex-col flex-[0.2]">
         {streamerListStore.list.length > 1 && (
-          <Box style={{ height: '30px' }}>
+          <ul className="flex flex-col">
             {streamerListStore.list.map(streamer => {
               return (
-                <Button
+                <li
+                  className="p-4"
                   key={streamer.id}
-                  h={30}
-                  size="xs"
-                  style={{ padding: '5px' }}
-                  colorScheme={
-                    chatUser === streamer.id
-                      ? 'teal'
-                      : configStore.darkModeEnabled
-                      ? 'blackAlpha'
-                      : 'gray'
-                  }
+                  // colorScheme={
+                  //   chatUser === streamer.id
+                  //     ? 'teal'
+                  //     : configStore.darkModeEnabled
+                  //     ? 'blackAlpha'
+                  //     : 'gray'
+                  // }
                   onClick={() => {
                     setChatUser(streamer.broadcaster_login);
                   }}
                 >
                   {streamer.broadcaster_login}
-                </Button>
+                </li>
               );
             })}
-          </Box>
+          </ul>
         )}
         <iframe
           title="chat"
@@ -94,35 +92,18 @@ export default function Content() {
           height="100%"
           width="100%"
         />
-      </Box>
+      </div>
     ) : (
       <></>
     );
 
   return (
-    <Box
-      minH="calc(100vh - 64px)"
-      bg={configStore.darkModeEnabled ? 'gray.800' : 'gray.100'}
-      style={{ display: 'flex', justifyContent: 'space-between' }}
+    <div
+      className="flex w-full"
+      // bg={configStore.darkModeEnabled ? 'gray.800' : 'gray.100'}
     >
-      <Flex>
-        <Box
-          style={
-            configStore.displayChat
-              ? {
-                  width: '100vw',
-                  height: 'calc(100vh - 64px)',
-                }
-              : {
-                  width: 'calc(100vw - 310px)',
-                  height: 'calc(100vh - 64px)',
-                }
-          }
-        >
-          <Observer>{renderPlayers}</Observer>
-        </Box>
-        <Observer>{renderintegratedChatSection}</Observer>
-      </Flex>
-    </Box>
+      <Observer>{renderPlayers}</Observer>
+      <Observer>{renderintegratedChatSection}</Observer>
+    </div>
   );
 }
