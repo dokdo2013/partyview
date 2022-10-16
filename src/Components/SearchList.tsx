@@ -13,7 +13,6 @@ export default function SearchList({
           key={item.id}
           onClick={() => {
             streamerListStore.addStreamer(item);
-            console.log(streamerListStore);
           }}
         >
           {item.display_name}

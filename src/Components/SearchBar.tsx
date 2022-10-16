@@ -7,8 +7,6 @@ export default function SearchBar() {
   const [searchKey, setSearchKey] = useState('');
   const { data, mutate } = useSearchList(searchKey);
 
-  console.log(data);
-
   return (
     <div>
       {data && <SearchList list={data} />}
