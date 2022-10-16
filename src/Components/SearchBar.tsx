@@ -9,7 +9,7 @@ export default function SearchBar() {
 
   return (
     <div>
-      {data && <SearchList list={data} />}
+      {data && <SearchList list={data} setSearchKey={setSearchKey} />}
       <SearchInput
         mutate={mutate}
         searchKey={searchKey}

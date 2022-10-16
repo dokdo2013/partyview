@@ -21,6 +21,10 @@ export default function SearchInput({
     };
   }, [dupKey]);
 
+  useEffect(() => {
+    !searchKey && setDupKey('');
+  }, [searchKey]);
+
   return (
     <div>
       <input
