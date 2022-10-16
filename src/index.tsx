@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import './fonts.css';
+import './styles/global.css';
 import { ColorModeScript } from '@chakra-ui/react';
 
 import * as Sentry from '@sentry/react';
