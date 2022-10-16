@@ -30,17 +30,20 @@ export default function Content() {
     >
       {streamerListStore.list.map(streamer => {
         return (
-          <li className="flex w-[50%] h-[40vh]" key={streamer.id}>
+          <li className="flex w-[50%] h-[50vh]" key={streamer.id}>
             <iframe
               title="embed"
               id={'embed_' + streamer.id}
               src={getTwitchPlayerUrl(streamer.broadcaster_login, host)}
-              className="w-[80%] h-full"
+              className={classNames(
+                'h-full',
+                configStore.displayEachChat ? 'w-[70%]' : 'w-full'
+              )}
             />
             {configStore.displayEachChat && (
               <iframe
                 title="chat"
-                className="w-[20%] h-full"
+                className="w-[30%] h-full"
                 scrolling="no"
                 id={'chat-' + streamer.id + '-embed'}
                 src={getTwitchChatUrl(
